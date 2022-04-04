@@ -6,7 +6,7 @@ homepage = "https://github.com/mmuppidi/httpx-auth-awssigv4"
 description = "This package provides utilities to add AWS Signature V4 authentication infrormation to calls made by python httpx library."
 authors = ["Mohan Muppidi <mkumar2301@gmail.com>"]
 readme = "README.md"
-license =  "BSD-3-Clause"
+license =  "MIT License"
 classifiers=[
     'Development Status :: 2 - Pre-Alpha',
     'Intended Audience :: Developers',
@@ -58,7 +58,10 @@ test = [
     "mypy",
     "flake8",
     "flake8-docstrings",
-    "pytest-cov"
+    "pytest-cov",
+    "markupsafe",
+    "jinja2",
+    "mkdocs-material-extensions"
     ]
 
 dev = ["tox", "pre-commit", "virtualenv", "pip", "twine", "toml", "bump2version"]

@@ -51,7 +51,7 @@ plugins:
       lang: en
   - mkdocstrings:
       watch:
-        - httpx-auth-awssigv4
+        - httpx_auth_awssigv4
 extra:
   social:
     - icon: fontawesome/brands/twitter
