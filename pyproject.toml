@@ -58,21 +58,20 @@ test = [
     "mypy",
     "flake8",
     "flake8-docstrings",
-    "pytest-cov",
-    "markupsafe",
-    "jinja2",
-    "mkdocs-material-extensions"
+    "pytest-cov"
     ]
 
 dev = ["tox", "pre-commit", "virtualenv", "pip", "twine", "toml", "bump2version"]
 
 doc = [
+    "jinja2",
+    "markupsafe",
     "mkdocs",
     "mkdocs-include-markdown-plugin",
     "mkdocs-material",
     "mkdocstrings",
-    "mkdocs-material-extension",
-    "mkdocs-autorefs"
+    "mkdocs-material-extensions",
+    "mkdocs-autorefs",
     ]
 
 [tool.black]

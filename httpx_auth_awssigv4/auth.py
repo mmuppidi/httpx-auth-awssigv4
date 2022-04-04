@@ -61,7 +61,6 @@ class SigV4Auth:
             region (str): AWS region to which the API request is being sent to
             token (Optional[str], optional): AWS Session token in case of temporary crendentials. Defaults to None.
         """
-
         self._access_key = access_key
         self._secret_key = secret_key
         self._token = token
