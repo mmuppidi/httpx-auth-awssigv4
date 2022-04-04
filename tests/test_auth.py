@@ -6,7 +6,7 @@ from unittest.mock import patch
 import pytest
 from httpx import Request
 
-from httpx_auth_awssigv4._auth import SigV4Auth
+from httpx_auth_awssigv4.auth import SigV4Auth
 
 
 @pytest.fixture
@@ -34,7 +34,7 @@ def test_get_authorization_header(auth, access_key_id):
     )
 
 
-@patch("httpx_auth_awssigv4._auth.datetime")
+@patch("httpx_auth_awssigv4.auth.datetime")
 def test_callable_permanent_creds(mock_dt, auth, access_key_id, access_token):
     mock_dt.utcnow.return_value = datetime(year=2020, month=4, day=20, hour=20, minute=30, second=30)
 
@@ -54,7 +54,7 @@ def test_callable_permanent_creds(mock_dt, auth, access_key_id, access_token):
     assert signed_request.headers["x-amz-date"] == "20200420T203030Z"
 
 
-@patch("httpx_auth_awssigv4._auth.datetime")
+@patch("httpx_auth_awssigv4.auth.datetime")
 def test_callable_sts_creds(mock_dt, auth, access_key_id):
     mock_dt.utcnow.return_value = datetime(year=2020, month=4, day=20, hour=20, minute=30, second=30)
 
@@ -78,7 +78,7 @@ def test_callable_sts_creds(mock_dt, auth, access_key_id):
     assert signed_request.headers["x-amz-date"] == "20200420T203030Z"
 
 
-@patch("httpx_auth_awssigv4._auth.datetime")
+@patch("httpx_auth_awssigv4.auth.datetime")
 def test_callable_sts_creds_post_call(mock_dt, auth, access_key_id):
     mock_dt.utcnow.return_value = datetime(year=2020, month=4, day=20, hour=20, minute=30, second=30)
 

@@ -7,6 +7,7 @@ https://docs.aws.amazon.com/general/latest/gr/sigv4-signed-request-examples.html
 import hashlib
 import hmac
 from datetime import datetime
+from typing import Optional
 
 from httpx import Request
 
@@ -22,25 +23,45 @@ class SigV4Auth:
         This class only supports adding authorization header as part of the request and doesn't support adding
         authorization header in query string
 
+    Usage:
+
+
+        import httpx
+        from httpx_auth_awssigv4 import Sigv4Auth
+
+        auth = Sigv4Auth(
+            access_key: "AWS_ACCESS_KEY_ID",
+            secret_key: "AWS_SECRET_ACCESS_KEY",
+            service: "execute-api",
+            region: "us-east-1"
+        )
+
+        response = httpx.get(
+            url="https://<API ID>.execute-api.<Region>.amazonaws.com/prod/detials",
+            params={"username": "tstark"},
+            auth=auth
+        )
+
     Args:
         access_key (str): AWS access key
         secret_key (str): AWS secret access key
-        token (str): AWS Session token in case of temporary crendentials
         service (str): Name of the service request is being made to
         region (str): AWS region to which the API request is being sent to
+        token (Optional[str], optional): AWS Session token in case of temporary crendentials. Defaults to None.
 
     """
 
-    def __init__(self, access_key: str, secret_key: str, token: str, service: str, region: str):
+    def __init__(self, access_key: str, secret_key: str, service: str, region: str, token: Optional[str] = None):
         """Auth class to provide AWS Sigv4 authentication support to httpx library.
 
         Args:
             access_key (str): AWS access key
             secret_key (str): AWS secret access key
-            token (str): AWS Session token in case of temporary crendentials
             service (str): Name of the service request is being made to
             region (str): AWS region to which the API request is being sent to
+            token (Optional[str], optional): AWS Session token in case of temporary crendentials. Defaults to None.
         """
+
         self._access_key = access_key
         self._secret_key = secret_key
         self._token = token
