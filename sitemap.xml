@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+         <loc>https://mmuppidi.github.io/httpx-auth-awssigv4/</loc>
+         <lastmod>2022-04-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://mmuppidi.github.io/httpx-auth-awssigv4/api/</loc>
+         <lastmod>2022-04-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://mmuppidi.github.io/httpx-auth-awssigv4/changelog/</loc>
+         <lastmod>2022-04-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://mmuppidi.github.io/httpx-auth-awssigv4/contributing/</loc>
+         <lastmod>2022-04-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://mmuppidi.github.io/httpx-auth-awssigv4/installation/</loc>
+         <lastmod>2022-04-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://mmuppidi.github.io/httpx-auth-awssigv4/usage/</loc>
+         <lastmod>2022-04-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+</urlset>
