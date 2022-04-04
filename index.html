@@ -241,8 +241,42 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#features" class="md-nav__link">
-    Features
+  <a href="#installation" class="md-nav__link">
+    Installation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav" aria-label="Usage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basic-usage" class="md-nav__link">
+    Basic Usage
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#with-sts-credentials" class="md-nav__link">
+    With STS credentials
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#todo" class="md-nav__link">
+    ToDo
   </a>
   
 </li>
@@ -373,8 +407,42 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#features" class="md-nav__link">
-    Features
+  <a href="#installation" class="md-nav__link">
+    Installation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav" aria-label="Usage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basic-usage" class="md-nav__link">
+    Basic Usage
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#with-sts-credentials" class="md-nav__link">
+    With STS credentials
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#todo" class="md-nav__link">
+    ToDo
   </a>
   
 </li>
@@ -415,20 +483,98 @@
 <p><a href="https://pypi.org/project/httpx-auth-awssigv4/"><img alt="pypi" src="https://img.shields.io/pypi/v/httpx-auth-awssigv4.svg" /></a>
 <a href="https://pypi.org/project/httpx-auth-awssigv4/"><img alt="python" src="https://img.shields.io/pypi/pyversions/httpx-auth-awssigv4.svg" /></a>
 <a href="https://github.com/mmuppidi/httpx-auth-awssigv4/actions/workflows/dev.yml"><img alt="Build Status" src="https://github.com/mmuppidi/httpx-auth-awssigv4/actions/workflows/dev.yml/badge.svg" /></a>
-<a href="https://codecov.io/github/mmuppidi/httpx-auth-awssigv4"><img alt="codecov" src="https://codecov.io/gh/mmuppidi/httpx-auth-awssigv4/branch/main/graphs/badge.svg" /></a></p>
-<p>This package provides utilities to add AWS Signature V4 authentication infrormation to calls made by python httpx library</p>
+<a href="https://codecov.io/github/mmuppidi/httpx-auth-awssigv4"><img alt="codecov" src="https://codecov.io/gh/mmuppidi/httpx-auth-awssigv4/branch/master/graphs/badge.svg" /></a></p>
+<p>This package provides utilities to add <a href="https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html">AWS Signature V4</a> authentication infrormation to calls made by python <a href="https://www.python-httpx.org/">httpx</a> library.</p>
 <ul>
 <li>Documentation: <a href="https://mmuppidi.github.io/httpx-auth-awssigv4">https://mmuppidi.github.io/httpx-auth-awssigv4</a></li>
 <li>GitHub: <a href="https://github.com/mmuppidi/httpx-auth-awssigv4">https://github.com/mmuppidi/httpx-auth-awssigv4</a></li>
 <li>PyPI: <a href="https://pypi.org/project/httpx-auth-awssigv4/">https://pypi.org/project/httpx-auth-awssigv4/</a></li>
-<li>Free software: BSD-3-Clause</li>
+<li>MIT License</li>
 </ul>
-<h3 id="features">Features<a class="headerlink" href="#features" title="Permanent link">&para;</a></h3>
+<h3 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>pip install httpx-auth-awssigv4
+</code></pre></div>
+<h3 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h3>
+<h4 id="basic-usage">Basic Usage<a class="headerlink" href="#basic-usage" title="Permanent link">&para;</a></h4>
+<p>This library has primarily been developed to help add authentication support to <a href="https://www.python-httpx.org/">httpx</a> library while making calls to
+REST API deployed using AWS API Gateway service. Will be extended in future to help with calling AWS services.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">httpx</span>
+<span class="kn">from</span> <span class="nn">httpx_auth_awssigv4</span> <span class="kn">import</span> <span class="n">Sigv4Auth</span>
+
+<span class="c1"># creating a callable for httpx library</span>
+<span class="n">auth</span> <span class="o">=</span> <span class="n">Sigv4Auth</span><span class="p">(</span>
+    <span class="n">access_key</span><span class="o">=</span><span class="s2">&quot;AWS_ACCESS_KEY_ID&quot;</span><span class="p">,</span>
+    <span class="n">secret_key</span><span class="o">=</span><span class="s2">&quot;AWS_SECRET_ACCESS_KEY&quot;</span><span class="p">,</span>
+    <span class="n">service</span><span class="o">=</span><span class="s2">&quot;execute-api&quot;</span><span class="p">,</span>
+    <span class="n">region</span><span class="o">=</span><span class="s2">&quot;us-east-1&quot;</span>
+<span class="p">)</span>
+
+<span class="c1"># Calling an API endpoint deployed using AWS API Gateway which has</span>
+<span class="c1"># AWS_IAM set as authorization type</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+    <span class="n">url</span><span class="o">=</span><span class="s2">&quot;https://&lt;API ID&gt;.execute-api.&lt;Region&gt;.amazonaws.com/prod/detials&quot;</span><span class="p">,</span>
+    <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;username&quot;</span><span class="p">:</span> <span class="s2">&quot;tstark&quot;</span><span class="p">},</span>
+    <span class="n">auth</span><span class="o">=</span><span class="n">auth</span>
+<span class="p">)</span>
+
+<span class="c1"># Making a post call</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+    <span class="n">url</span><span class="o">=</span><span class="s2">&quot;https://&lt;API ID&gt;.execute-api.&lt;Region&gt;.amazonaws.com/prod/details&quot;</span><span class="p">,</span>
+    <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;username&quot;</span><span class="p">:</span> <span class="s2">&quot;tstark&quot;</span><span class="p">},</span>
+    <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;mission&quot;</span><span class="p">:</span> <span class="s2">&quot;avengers&quot;</span><span class="p">},</span>
+    <span class="n">auth</span><span class="o">=</span><span class="n">auth</span>
+<span class="p">)</span>
+</code></pre></div>
+<h4 id="with-sts-credentials">With STS credentials<a class="headerlink" href="#with-sts-credentials" title="Permanent link">&para;</a></h4>
+<p><code>Sigv4Auth</code> can be used with temporary credentials generated with tools like <a href="https://github.com/benkehoe/aws-sso-util">aws-sso-util</a>.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">boto3</span>
+<span class="kn">from</span> <span class="nn">httpx_auth_awssigv4</span> <span class="kn">import</span> <span class="n">Sigv4Auth</span>
+
+<span class="c1"># fetch temporary credentials from AWS STS service</span>
+<span class="n">credentials</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">Session</span><span class="p">(</span><span class="n">profile_name</span><span class="o">=</span><span class="s2">&quot;&lt;profile&gt;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">get_credentials</span><span class="p">()</span>
+
+<span class="c1"># creating a callable for httpx library</span>
+<span class="n">auth</span> <span class="o">=</span> <span class="n">Sigv4Auth</span><span class="p">(</span>
+    <span class="n">access_key</span><span class="o">=</span><span class="n">credentials</span><span class="o">.</span><span class="n">access_key</span><span class="p">,</span>
+    <span class="n">secret_key</span><span class="o">=</span><span class="n">credentials</span><span class="o">.</span><span class="n">secret_key</span><span class="p">,</span>
+    <span class="n">token</span><span class="o">=</span><span class="n">credentials</span><span class="o">.</span><span class="n">token</span>
+    <span class="n">service</span><span class="o">=</span><span class="s2">&quot;execute-api&quot;</span><span class="p">,</span>
+    <span class="n">region</span><span class="o">=</span><span class="s2">&quot;us-east-1&quot;</span>
+<span class="p">)</span>
+</code></pre></div>
+<p><code>Sigv4Auth</code> can also be used with temporary credentials from AWS STS.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">boto3</span>
+<span class="kn">from</span> <span class="nn">httpx_auth_awssigv4</span> <span class="kn">import</span> <span class="n">Sigv4Auth</span>
+
+<span class="c1"># role with `execute-api` permissions</span>
+<span class="n">ROLE_ARN</span><span class="o">=</span><span class="s2">&quot;arn:aws:iam::&lt;ACCOUNT ID&gt;:role/&lt;ROLE NAME&quot;</span>
+
+<span class="c1"># fetch temporary credentials from AWS STS service</span>
+<span class="n">credentials</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s1">&#39;sts&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">assume_role</span><span class="p">(</span>
+    <span class="n">RoleArn</span><span class="o">=</span><span class="n">ROLE_ARN</span><span class="p">,</span>
+    <span class="n">RoleSessionName</span><span class="o">=</span><span class="s2">&quot;httpxcall&quot;</span>
+<span class="p">)[</span><span class="s2">&quot;Credentials&quot;</span><span class="p">]</span>
+
+<span class="c1"># creating a callable for httpx library</span>
+<span class="n">auth</span> <span class="o">=</span> <span class="n">Sigv4Auth</span><span class="p">(</span>
+    <span class="n">access_key</span><span class="o">=</span><span class="n">credentials</span><span class="p">[</span><span class="s2">&quot;AccessKeyId&quot;</span><span class="p">],</span>
+    <span class="n">secret_key</span><span class="o">=</span><span class="n">credentials</span><span class="p">[</span><span class="s2">&quot;SecretAccessKey&quot;</span><span class="p">],</span>
+    <span class="n">token</span><span class="o">=</span><span class="n">credentials</span><span class="p">[</span><span class="s2">&quot;SessionToken&quot;</span><span class="p">]</span>
+    <span class="n">service</span><span class="o">=</span><span class="s2">&quot;execute-api&quot;</span><span class="p">,</span>
+    <span class="n">region</span><span class="o">=</span><span class="s2">&quot;us-east-1&quot;</span>
+<span class="p">)</span>
+</code></pre></div>
+<h3 id="todo">ToDo<a class="headerlink" href="#todo" title="Permanent link">&para;</a></h3>
 <ul>
-<li>TODO</li>
+<li>Add examples on usage along with API backend deployment instructions.</li>
+<li>Test the library with AWS services and add integration tests.</li>
 </ul>
 <h3 id="credits">Credits<a class="headerlink" href="#credits" title="Permanent link">&para;</a></h3>
-<p>This package was created with <a href="https://github.com/audreyr/cookiecutter">Cookiecutter</a> and the <a href="https://github.com/waynerv/cookiecutter-pypackage">waynerv/cookiecutter-pypackage</a> project template.</p>
+<ul>
+<li>This package was created with <a href="https://github.com/audreyr/cookiecutter">Cookiecutter</a> and the <a href="https://github.com/waynerv/cookiecutter-pypackage">waynerv/cookiecutter-pypackage</a> project template.</li>
+</ul>
 <!-- END INCLUDE -->
                 
               

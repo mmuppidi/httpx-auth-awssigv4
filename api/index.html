@@ -284,6 +284,67 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#httpx_auth_awssigv4.auth" class="md-nav__link">
+    auth
+  </a>
+  
+    <nav class="md-nav" aria-label="auth">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#httpx_auth_awssigv4.auth.SigV4Auth" class="md-nav__link">
+    SigV4Auth
+  </a>
+  
+    <nav class="md-nav" aria-label="SigV4Auth">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#httpx_auth_awssigv4.auth.SigV4Auth.__call__" class="md-nav__link">
+    __call__()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#httpx_auth_awssigv4.auth.SigV4Auth.__init__" class="md-nav__link">
+    __init__()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#httpx_auth_awssigv4.auth.SigV4Auth.get_authorization_header" class="md-nav__link">
+    get_authorization_header()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#httpx_auth_awssigv4.auth.SigV4Auth.get_canonical_request" class="md-nav__link">
+    get_canonical_request()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#httpx_auth_awssigv4.auth.SigV4Auth.get_signature_key" class="md-nav__link">
+    get_signature_key()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -351,6 +412,67 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#httpx_auth_awssigv4.auth" class="md-nav__link">
+    auth
+  </a>
+  
+    <nav class="md-nav" aria-label="auth">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#httpx_auth_awssigv4.auth.SigV4Auth" class="md-nav__link">
+    SigV4Auth
+  </a>
+  
+    <nav class="md-nav" aria-label="SigV4Auth">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#httpx_auth_awssigv4.auth.SigV4Auth.__call__" class="md-nav__link">
+    __call__()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#httpx_auth_awssigv4.auth.SigV4Auth.__init__" class="md-nav__link">
+    __init__()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#httpx_auth_awssigv4.auth.SigV4Auth.get_authorization_header" class="md-nav__link">
+    get_authorization_header()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#httpx_auth_awssigv4.auth.SigV4Auth.get_canonical_request" class="md-nav__link">
+    get_canonical_request()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#httpx_auth_awssigv4.auth.SigV4Auth.get_signature_key" class="md-nav__link">
+    get_signature_key()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -390,6 +512,606 @@
 
 
 
+
+
+
+  <div class="doc doc-object doc-module">
+
+
+
+<h2 id="httpx_auth_awssigv4.auth" class="doc doc-heading">
+        <code>auth</code>
+
+
+
+<a href="#httpx_auth_awssigv4.auth" class="headerlink" title="Permanent link">&para;</a></h2>
+
+    <div class="doc doc-contents ">
+
+      <p>Utility to help with SigV4 authentication for httpx python library.</p>
+<p>Reference:
+https://docs.aws.amazon.com/general/latest/gr/sigv4-signed-request-examples.html</p>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h3 id="httpx_auth_awssigv4.auth.SigV4Auth" class="doc doc-heading">
+        <code>SigV4Auth</code>
+
+
+
+<a href="#httpx_auth_awssigv4.auth.SigV4Auth" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Auth class to provide AWS Sigv4 authentication support to httpx library.</p>
+<p>When we send API requests to AWS, we need to sign the requests so that AWS can identify who sent them. To sign the
+requests we use Signature V4 process to sign API requests. Instantiation of this class creates an auth object that
+python httpx library can use to sign the API requests before sending them to AWS.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This class only supports adding authorization header as part of the request and doesn't support adding
+authorization header in query string</p>
+</div>
+<p>Usage:</p>
+<div class="highlight"><pre><span></span><code>import httpx
+from httpx_auth_awssigv4 import Sigv4Auth
+
+auth = Sigv4Auth(
+    access_key: &quot;AWS_ACCESS_KEY_ID&quot;,
+    secret_key: &quot;AWS_SECRET_ACCESS_KEY&quot;,
+    service: &quot;execute-api&quot;,
+    region: &quot;us-east-1&quot;
+)
+
+response = httpx.get(
+    url=&quot;https://&lt;API ID&gt;.execute-api.&lt;Region&gt;.amazonaws.com/prod/detials&quot;,
+    params={&quot;username&quot;: &quot;tstark&quot;},
+    auth=auth
+)
+</code></pre></div>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>access_key</code></td>
+        <td><code>str</code></td>
+        <td><p>AWS access key</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>secret_key</code></td>
+        <td><code>str</code></td>
+        <td><p>AWS secret access key</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>service</code></td>
+        <td><code>str</code></td>
+        <td><p>Name of the service request is being made to</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>region</code></td>
+        <td><code>str</code></td>
+        <td><p>AWS region to which the API request is being sent to</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>token</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>AWS Session token in case of temporary crendentials. Defaults to None.</p></td>
+        <td><em>required</em></td>
+      </tr>
+  </tbody>
+</table>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h4 id="httpx_auth_awssigv4.auth.SigV4Auth.__call__" class="doc doc-heading">
+<code class="highlight language-python"><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-special"><code>special</code></small>
+  </span>
+
+<a href="#httpx_auth_awssigv4.auth.SigV4Auth.__call__" class="headerlink" title="Permanent link">&para;</a></h4>
+
+    <div class="doc doc-contents ">
+
+      <p>The httpx library calls this method before sending the API request.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>request</code></td>
+        <td><code>Request</code></td>
+        <td><p>API request information as a httpx Request</p></td>
+        <td><em>required</em></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>Request</code></td>
+      <td><p>Request : Modified request signed with AWS crdentials using Signature v4 process</p></td>
+    </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>httpx_auth_awssigv4/auth.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Request</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;The httpx library calls this method before sending the API request.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        request (Request): API request information as a httpx Request</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Request : Modified request signed with AWS crdentials using Signature v4 process</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Create a date for headers and the credential string</span>
+    <span class="n">current_time</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span>
+    <span class="n">timestamp</span> <span class="o">=</span> <span class="n">current_time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y%m</span><span class="si">%d</span><span class="s2">T%H%M%SZ&quot;</span><span class="p">)</span>
+    <span class="n">datestamp</span> <span class="o">=</span> <span class="n">current_time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y%m</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># Date w/o time, used in credential scope</span>
+
+    <span class="c1"># CREATE A CANONICAL REQUEST</span>
+    <span class="n">canonical_request</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_canonical_request</span><span class="p">(</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">,</span> <span class="n">timestamp</span><span class="o">=</span><span class="n">timestamp</span><span class="p">)</span>
+
+    <span class="c1"># CREATE THE STRING TO SIGN</span>
+
+    <span class="n">credential_scope</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">datestamp</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_region</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_service</span><span class="si">}</span><span class="s2">/aws4_request&quot;</span>
+    <span class="n">string_to_sign</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_algorithm</span><span class="si">}</span><span class="se">\n</span><span class="si">{</span><span class="n">timestamp</span><span class="si">}</span><span class="se">\n</span><span class="si">{</span><span class="n">credential_scope</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">hashlib</span><span class="o">.</span><span class="n">sha256</span><span class="p">(</span><span class="n">canonical_request</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span><span class="si">}</span><span class="s1">&#39;</span>
+    <span class="p">)</span>
+
+    <span class="c1"># CALCULATE THE SIGNATURE</span>
+    <span class="n">signing_key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_signature_key</span><span class="p">(</span><span class="n">datestamp</span><span class="p">)</span>
+    <span class="n">signature</span> <span class="o">=</span> <span class="n">hmac</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">signing_key</span><span class="p">,</span> <span class="p">(</span><span class="n">string_to_sign</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">),</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha256</span><span class="p">)</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
+
+    <span class="c1"># ADD SIGNING INFORMATION TO THE REQUEST</span>
+
+    <span class="n">authorization_header</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_authorization_header</span><span class="p">(</span><span class="n">credential_scope</span><span class="o">=</span><span class="n">credential_scope</span><span class="p">,</span> <span class="n">signature</span><span class="o">=</span><span class="n">signature</span><span class="p">)</span>
+
+    <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;x-amz-date&quot;</span><span class="p">:</span> <span class="n">timestamp</span><span class="p">,</span>
+        <span class="s2">&quot;Authorization&quot;</span><span class="p">:</span> <span class="n">authorization_header</span><span class="p">,</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_token</span><span class="p">:</span>
+        <span class="n">headers</span><span class="p">[</span><span class="s2">&quot;X-Amz-Security-Token&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_token</span>
+
+    <span class="n">request</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">headers</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">request</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h4 id="httpx_auth_awssigv4.auth.SigV4Auth.__init__" class="doc doc-heading">
+<code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">access_key</span><span class="p">,</span> <span class="n">secret_key</span><span class="p">,</span> <span class="n">service</span><span class="p">,</span> <span class="n">region</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-special"><code>special</code></small>
+  </span>
+
+<a href="#httpx_auth_awssigv4.auth.SigV4Auth.__init__" class="headerlink" title="Permanent link">&para;</a></h4>
+
+    <div class="doc doc-contents ">
+
+      <p>Auth class to provide AWS Sigv4 authentication support to httpx library.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>access_key</code></td>
+        <td><code>str</code></td>
+        <td><p>AWS access key</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>secret_key</code></td>
+        <td><code>str</code></td>
+        <td><p>AWS secret access key</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>service</code></td>
+        <td><code>str</code></td>
+        <td><p>Name of the service request is being made to</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>region</code></td>
+        <td><code>str</code></td>
+        <td><p>AWS region to which the API request is being sent to</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>token</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>AWS Session token in case of temporary crendentials. Defaults to None.</p></td>
+        <td><code>None</code></td>
+      </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>httpx_auth_awssigv4/auth.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">access_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">secret_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">service</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">region</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">token</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Auth class to provide AWS Sigv4 authentication support to httpx library.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        access_key (str): AWS access key</span>
+<span class="sd">        secret_key (str): AWS secret access key</span>
+<span class="sd">        service (str): Name of the service request is being made to</span>
+<span class="sd">        region (str): AWS region to which the API request is being sent to</span>
+<span class="sd">        token (Optional[str], optional): AWS Session token in case of temporary crendentials. Defaults to None.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">_access_key</span> <span class="o">=</span> <span class="n">access_key</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_secret_key</span> <span class="o">=</span> <span class="n">secret_key</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_token</span> <span class="o">=</span> <span class="n">token</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_service</span> <span class="o">=</span> <span class="n">service</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_region</span> <span class="o">=</span> <span class="n">region</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">_signed_headers</span> <span class="o">=</span> <span class="s2">&quot;host;x-amz-date&quot;</span>
+
+    <span class="c1"># the hashing algorithm that you use to calculate the digests in the canonical request</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_algorithm</span> <span class="o">=</span> <span class="s2">&quot;AWS4-HMAC-SHA256&quot;</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h4 id="httpx_auth_awssigv4.auth.SigV4Auth.get_authorization_header" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">get_authorization_header</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">credential_scope</span><span class="p">,</span> <span class="n">signature</span><span class="p">)</span></code>
+
+
+<a href="#httpx_auth_awssigv4.auth.SigV4Auth.get_authorization_header" class="headerlink" title="Permanent link">&para;</a></h4>
+
+    <div class="doc doc-contents ">
+
+      <p>Constructs "Authorization" header to include in the request.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>credential_scope</code></td>
+        <td><code>str</code></td>
+        <td><p>String that includes the date, the Region you are targeting, the service you are
+requesting, and a termination string</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>signature</code></td>
+        <td><code>str</code></td>
+        <td><p>calculated signature to include in Authorization header</p></td>
+        <td><em>required</em></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>str</code></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>httpx_auth_awssigv4/auth.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_authorization_header</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">credential_scope</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">signature</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Constructs &quot;Authorization&quot; header to include in the request.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        credential_scope (str): String that includes the date, the Region you are targeting, the service you are</span>
+<span class="sd">            requesting, and a termination string</span>
+<span class="sd">        signature (str): calculated signature to include in Authorization header</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: String to send under &quot;Authorization&quot; header</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_algorithm</span><span class="si">}</span><span class="s2"> Credential=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_access_key</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">credential_scope</span><span class="si">}</span><span class="s2">,&quot;</span>
+        <span class="sa">f</span><span class="s2">&quot; SignedHeaders=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_signed_headers</span><span class="si">}</span><span class="s2">, Signature=</span><span class="si">{</span><span class="n">signature</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="p">)</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h4 id="httpx_auth_awssigv4.auth.SigV4Auth.get_canonical_request" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">get_canonical_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">timestamp</span><span class="p">)</span></code>
+
+
+<a href="#httpx_auth_awssigv4.auth.SigV4Auth.get_canonical_request" class="headerlink" title="Permanent link">&para;</a></h4>
+
+    <div class="doc doc-contents ">
+
+      <p>Creates a canonical request.</p>
+<p>This function returns information from your request in a standardized (canonical) format. Read more about
+Cananolical requests below
+https://docs.aws.amazon.com/general/latest/gr/sigv4-create-canonical-request.html</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>request</code></td>
+        <td><code>Request</code></td>
+        <td><p>httpx Request object</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>timestamp</code></td>
+        <td><code>str</code></td>
+        <td><p>The date is specified with ISO8601 basic format in the x-amz-date header in the format
+YYYYMMDD'T'HHMMSS'Z'</p></td>
+        <td><em>required</em></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>str</code></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>httpx_auth_awssigv4/auth.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_canonical_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">,</span> <span class="n">timestamp</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Creates a canonical request.</span>
+
+<span class="sd">    This function returns information from your request in a standardized (canonical) format. Read more about</span>
+<span class="sd">    Cananolical requests below</span>
+<span class="sd">    https://docs.aws.amazon.com/general/latest/gr/sigv4-create-canonical-request.html</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        request (Request): httpx Request object</span>
+<span class="sd">        timestamp (str): The date is specified with ISO8601 basic format in the x-amz-date header in the format</span>
+<span class="sd">            YYYYMMDD&#39;T&#39;HHMMSS&#39;Z&#39;</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: request infromation in a canonical format</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">canonical_uri</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">url</span><span class="o">.</span><span class="n">path</span>
+    <span class="n">canonical_querystring</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">url</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+    <span class="n">canonical_headers</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;host:</span><span class="si">{</span><span class="n">request</span><span class="o">.</span><span class="n">url</span><span class="o">.</span><span class="n">host</span><span class="si">}</span><span class="se">\n</span><span class="s2">x-amz-date:</span><span class="si">{</span><span class="n">timestamp</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">content</span><span class="p">:</span>
+        <span class="n">payload_hash</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha256</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">content</span><span class="p">)</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">payload_hash</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha256</span><span class="p">((</span><span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
+
+    <span class="n">canonical_request</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">request</span><span class="o">.</span><span class="n">method</span><span class="si">}</span><span class="se">\n</span><span class="si">{</span><span class="n">canonical_uri</span><span class="si">}</span><span class="se">\n</span><span class="si">{</span><span class="n">canonical_querystring</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">canonical_headers</span><span class="si">}</span><span class="se">\n</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_signed_headers</span><span class="si">}</span><span class="se">\n</span><span class="si">{</span><span class="n">payload_hash</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">canonical_request</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h4 id="httpx_auth_awssigv4.auth.SigV4Auth.get_signature_key" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">get_signature_key</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">date_stamp</span><span class="p">)</span></code>
+
+
+<a href="#httpx_auth_awssigv4.auth.SigV4Auth.get_signature_key" class="headerlink" title="Permanent link">&para;</a></h4>
+
+    <div class="doc doc-contents ">
+
+      <p>Creates a signing key derived from secret key.</p>
+<p>Read more about creating a signing key in the following page
+Ref: https://docs.aws.amazon.com/general/latest/gr/sigv4-calculate-signature.html</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>date_stamp</code></td>
+        <td><code>str</code></td>
+        <td><p>date used in credential scope, should be in '%Y%m%d' format</p></td>
+        <td><em>required</em></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>bytes</code></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>httpx_auth_awssigv4/auth.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_signature_key</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">date_stamp</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Creates a signing key derived from secret key.</span>
+
+<span class="sd">    Read more about creating a signing key in the following page</span>
+<span class="sd">    Ref: https://docs.aws.amazon.com/general/latest/gr/sigv4-calculate-signature.html</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        date_stamp (str): date used in credential scope, should be in &#39;%Y%m%d&#39; format</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: Signing key derived from secret key</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">sign</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">hmac</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">msg</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">),</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha256</span><span class="p">)</span><span class="o">.</span><span class="n">digest</span><span class="p">()</span>
+
+    <span class="n">date</span> <span class="o">=</span> <span class="n">sign</span><span class="p">((</span><span class="s2">&quot;AWS4&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_secret_key</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">),</span> <span class="n">date_stamp</span><span class="p">)</span>
+    <span class="n">region</span> <span class="o">=</span> <span class="n">sign</span><span class="p">(</span><span class="n">date</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_region</span><span class="p">)</span>
+    <span class="n">service</span> <span class="o">=</span> <span class="n">sign</span><span class="p">(</span><span class="n">region</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_service</span><span class="p">)</span>
+    <span class="n">signing</span> <span class="o">=</span> <span class="n">sign</span><span class="p">(</span><span class="n">service</span><span class="p">,</span> <span class="s2">&quot;aws4_request&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">signing</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
 
 
 
