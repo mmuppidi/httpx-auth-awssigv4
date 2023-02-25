@@ -8,6 +8,7 @@ import hashlib
 import hmac
 from datetime import datetime
 from typing import Optional
+from urllib.parse import quote, urlencode
 
 from httpx import Request
 
@@ -110,8 +111,10 @@ class SigV4Auth:
         Returns:
             str: request infromation in a canonical format
         """
-        canonical_uri = request.url.path
-        canonical_querystring = request.url.query.decode("utf-8")
+        # AWS calculates signature using url encoded path
+        canonical_uri = quote(request.url.path)
+        # Signature is also calculated using sorted params
+        canonical_querystring = urlencode(sorted(request.url.params.items()))
         canonical_headers = f"host:{request.url.host}\nx-amz-date:{timestamp}\n"
 
         if request.content:
