@@ -47,7 +47,7 @@ def test_callable_permanent_creds(mock_dt, auth, access_key_id, access_token):
     assert signed_request.headers["authorization"] == (
         f"AWS4-HMAC-SHA256 Credential={access_key_id}/20200420/"
         f"{auth._region}/{auth._service}/aws4_request, SignedHeaders=host;x-amz-date, "
-        "Signature=8f841949ffd9e2f2ca5406f52cf5aa5e06b1d2ed8140b444d0ac46a845f627ec"
+        "Signature=2b0d23626261d2b9256a90dcb74bee78eae17dcf8b3e24b992406ae489d75cb4"
     )
 
     assert signed_request.headers["x-amz-security-token"] == access_token
@@ -71,7 +71,7 @@ def test_callable_sts_creds(mock_dt, auth, access_key_id):
     assert signed_request.headers["authorization"] == (
         f"AWS4-HMAC-SHA256 Credential={access_key_id}/20200420/"
         f"{auth._region}/{auth._service}/aws4_request, SignedHeaders=host;x-amz-date, "
-        "Signature=8f841949ffd9e2f2ca5406f52cf5aa5e06b1d2ed8140b444d0ac46a845f627ec"
+        "Signature=2b0d23626261d2b9256a90dcb74bee78eae17dcf8b3e24b992406ae489d75cb4"
     )
 
     assert "x-amz-security-token" not in signed_request.headers
@@ -96,7 +96,7 @@ def test_callable_sts_creds_post_call(mock_dt, auth, access_key_id):
     assert signed_request.headers["authorization"] == (
         f"AWS4-HMAC-SHA256 Credential={access_key_id}/20200420/"
         f"{auth._region}/{auth._service}/aws4_request, SignedHeaders=host;x-amz-date, "
-        "Signature=637069169cdbb543db43d56c43b10e43e4d256187dcbcef5a30d905eca8a8182"
+        "Signature=2e216177c15a81a721e56ce9489591b664109535709c12f69fe2e4472046b080"
     )
 
     assert "x-amz-security-token" not in signed_request.headers
