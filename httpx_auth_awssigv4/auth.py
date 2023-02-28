@@ -11,6 +11,7 @@ from typing import Optional
 from urllib.parse import quote, urlencode
 
 from httpx import Request
+from rfc3986 import normalize_uri
 
 
 class SigV4Auth:
@@ -112,7 +113,7 @@ class SigV4Auth:
             str: request infromation in a canonical format
         """
         # AWS calculates signature using url encoded path
-        canonical_uri = quote(request.url.path)
+        canonical_uri = quote(normalize_uri(request.url.path))
         # Signature is also calculated using sorted params
         canonical_querystring = urlencode(sorted(request.url.params.items()))
         canonical_headers = f"host:{request.url.host}\nx-amz-date:{timestamp}\n"
